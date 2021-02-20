@@ -1,0 +1,12 @@
+{
+  "mac": {
+    "hardenedRuntime": false,
+    "extendInfo": {
+      "NSMicrophoneUsageDescription": "text for mic access",
+      "NSCameraUsageDescription": "text for camera access"
+    },
+    "target": [
+      "dmg"
+    ]
+  }
+}

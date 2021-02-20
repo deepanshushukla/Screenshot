@@ -1,0 +1,9 @@
+node_modules/
+dist
+videos
+.idea/
+build
+build.sh
+package-lock.json
+.history/
+.DS_Store

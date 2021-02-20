@@ -1,0 +1,12 @@
+.videoContainer{
+    display: flex;
+    width : 100%;
+    margin-top: 20px;;
+}
+.videoContainer--child{
+    flex:1 1 auto;
+    border:1px red solid;
+    text-align:center;
+    margin:5px;
+    max-width: 300px;
+}

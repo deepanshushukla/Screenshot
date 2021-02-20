@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> Screenshot</title>
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval' 'unsafe-inline';" />
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<header
+        style="display: flex;justify-content: space-between;align-items: center;background: cornsilk;padding: 0 7px;height: 50px;border-radius: 1px;">
+    <h4>Testing Screenshot </h4>
+    <button id="trigger"
+            style="background: yellow;border: 1px solid #000000;border-radius: 2px;padding: 5px;cursor: pointer;">
+        Take Screenshot
+    </button>
+    <button id="trigger-save"
+            style="background: green;border: 1px solid #000000;border-radius: 2px;padding: 5px;cursor: pointer;">
+        Save Recording
+    </button>
+    <button id="trigger-upload"
+            style="background: blue;border: 1px solid #000000;border-radius: 2px;padding: 5px;cursor: pointer;">
+        Upload
+    </button>
+</header>
+<!--<div style="-->
+<!--    padding: 10px;-->
+<!--    width: 100%;-->
+<!--    height: 300px;-->
+<!--">-->
+<!--    <img style="width: 100%" id="my-preview"/>-->
+<!--</div>-->
+
+<script src="screencapture.js"></script>
+
+
+<script>
+    //* Here the fullScreenScreenshot function *//
+    const getScreenShot = ()=> {
+        fullScreenScreenshot(function(base64data){
+           // document.getElementById("my-preview").setAttribute("src", base64data);
+        },'image/png')
+    }
+    setInterval( () => {
+        //getScreenShot();
+    }, 10000)
+    document.getElementById("trigger").addEventListener("click", getScreenShot,false);
+    document.getElementById("trigger-save").addEventListener("click", saveRecording,false);
+    document.getElementById("trigger-upload").addEventListener("click", fileUpload,false);
+</script>
+<script>
+    require('./renderer');
+</script>
+<div class="videoContainer">
+    <video class="videoContainer--child" id="screenShareVideo" controls>
+    </video>
+    <video  class="videoContainer--child" id="savedVideo" controls>
+    </video>
+</div>
+
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <title>Public Client Flow</title>-->
+
+<!--</head>-->
+<!--<body>-->
+<!--<button id="btn-genesys-login">Login To Genesys</button>-->
+<!--<label>User Current Presence:</label><label id="currentPresence"></label>-->
+<!--<div id="messages"></div>-->
+<!--<script>window.$ = window.jQuery = require('./jquery.min.js');</script>-->
+<!--<script src="loginhandler.js"></script>-->
+
+<!--</body>-->
+<!--</html>-->
