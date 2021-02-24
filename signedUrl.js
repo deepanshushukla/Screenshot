@@ -10,7 +10,6 @@ for (i = 0; i < 10; i++) {
     var presignedPUTURL = s3.getSignedUrl('putObject', {
         Bucket: 'screen-recording-test',
         Key: 'deepanshu' + i, //filename
-        ContentType: 'video/webm',
         Expires: 604800 //time to expire in seconds
     });
     console.log(presignedPUTURL);

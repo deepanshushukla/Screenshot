@@ -11,9 +11,9 @@ const mime = require('mime');
 var chunks = [];
 var mediaRecorder;
 var videoStream;
-const TIMESLICE = 10000;
+const TIMESLICE = 30000;
 function fileUpload() {
-    const fileContent = fs.readFileSync(path.join(__dirname,'videos', 'video_10sec_1613751444704.webm'));
+    const fileContent = fs.readFileSync(path.join(__dirname,'videos', 'video_60sec_1613983482359.webm'));
     console.log('file',fileContent);
    // console.log(mime.getType(path.join(__dirname,'videos', 'video_30sec_1613751557406.webm')));
 
@@ -25,11 +25,13 @@ function fileUpload() {
         },
     };
 
-    fetch("https://screen-recording-test.s3.amazonaws.com/deepanshu0?AWSAccessKeyId=AKIAU7RBOAYDXM3ZCAA6&Expires=1614341685&Signature=GAQD%2FWQK8VDAd0iT6LWySE8SN%2Bk%3D", requestOptions)
+    fetch("https://screen-recording-test.s3.amazonaws.com/deepanshu0.webm?AWSAccessKeyId=AKIAU7RBOAYDXM3ZCAA6&Expires=1614589151&Signature=iGgV32ofbhQhUmqJC28i0nK6pTc%3D",
+        requestOptions)
         .then(result => {
             console.log(result)
 
-        fetch("https://screen-recording-test.s3.amazonaws.com/deepanshu0?AWSAccessKeyId=AKIAU7RBOAYDXM3ZCAA6&Expires=1614341685&Signature=TptF52Oz%2BseOlW5aNHLw%2Fzp1hBw%3D").then((res)=>{
+        fetch("https://screen-recording-test.s3.amazonaws.com/deepanshu0.webm?AWSAccessKeyId=AKIAU7RBOAYDXM3ZCAA6&Expires=1614589151&Signature=2sg0Nt86jYflXp3B6znPxG%2BVQ7I%3D").
+        then((res)=>{
             res?.arrayBuffer().then((buff)=> {
                 const data = new Uint8Array(buff);
                 console.log(data);
@@ -217,13 +219,14 @@ function fullScreenScreenshot(callback, imageFormat) {
             if ((source.name === "Entire Screen") && (source.name !== "Screenshot")) {
                 try{
                     const stream = await navigator.mediaDevices.getUserMedia({
+                        frameRate: { ideal: 10, max: 20 },
                         audio: false,
                         video: {
                             mandatory: {
                                 chromeMediaSource: 'desktop',
                                 chromeMediaSourceId: source.id,
-                                minWidth: 1280,
-                                maxWidth: 1280,
+                                minWidth: 1080,
+                                maxWidth: 1080,
                                 minHeight: 720,
                                 maxHeight: 720
                             }
