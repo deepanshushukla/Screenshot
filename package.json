@@ -1,23 +1,56 @@
 {
-  "name": "screenshot",
+  "name": "Screenshot",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is description",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron ."
+    "start": "ELECTRON_ENV=development electron .",
+    "pack": "electron-builder --dir",
+    "build": "electron-builder -mw",
+    "postinstall": "electron-builder install-app-deps"
   },
   "build": {
-    "appId": "screenshotapp.deep",
+    "appId": "com.deep.screenshot",
+    "asar": false,
     "mac": {
-      "icon": "dist",
       "hardenedRuntime": false,
       "extendInfo": {
-        "NSCameraUsageDescription": "text for camera access"
+        "NSCameraUsageDescription": "Allow Access to camera"
       },
       "target": [
         "dmg"
       ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "requestedExecutionLevel": "requireAdministrator",
+      "icon": "build/icon.ico"
+    },
+    "dmg": {
+      "background": "build/appdmg.png",
+      "icon": "build/icon.icns",
+      "iconSize": 100,
+      "contents": [
+        {
+          "x": 380,
+          "y": 280,
+          "type": "link",
+          "path": "/Applications"
+        },
+        {
+          "x": 110,
+          "y": 280,
+          "type": "file"
+        }
+      ]
+    },
+    "nsis": {
+      "uninstallDisplayName": "ScreenShot App",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
     }
   },
   "author": "",
@@ -35,6 +68,8 @@
     "url": "^0.11.0"
   },
   "devDependencies": {
-    "electron": "^10.1.2"
+    "electron": "^10.1.2",
+    "electron-builder": "^22.10.5",
+    "electron-is-dev": "^2.0.0"
   }
 }

@@ -212,7 +212,6 @@ function fullScreenScreenshot(callback, imageFormat) {
     };
 
     desktopCapturer.getSources({ types: ['window', 'screen'] }).then(async sources => {
-        // console.log(sources);
         for (const source of sources) {
             // Filter: main screen
             //console.log(sources)

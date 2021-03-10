@@ -2,7 +2,7 @@
 
 const {BrowserWindow} = require('electron');
 const authService = require('../auth/auth-service');
-const createAppWindow = require('../main/app-process');
+const createAppWindow = require('../autho/app-process');
 
 let win = null;
 

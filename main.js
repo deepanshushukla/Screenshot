@@ -1,9 +1,9 @@
 
 // Modules to control application life and create native browser window
 const {app,ipcMain, BrowserWindow,Menu,systemPreferences} = require('electron');
-const {createAuthWindow} = require('./main/auth-process');
+const {createAuthWindow} = require('./autho/auth-process');
 const oauthConfig = require('./config').oauth;
-
+console.log('isDev-----',process.env.ELECTRON_ENV);
 const windowParams = {
     alwaysOnTop: true,
     autoHideMenuBar: false,
@@ -11,14 +11,15 @@ const windowParams = {
         nodeIntegration: false
     }
 };
-const path = require('path')
+const path = require('path');
 // const genesysOAuth = electronOauth2(oauthConfig, windowParams);
-require('electron-reload')(__dirname, {
-    // Note that the path to electron may vary according to the main file
-    electron: require(`${__dirname}/node_modules/electron`),
-    ignored: /videos|node_modules|[\/\\]\./,
-    argv: []
-});
+// require('electron-reload')(__dirname, {
+//     // Note that the path to electron may vary according to the main file
+//     electron: require(`${__dirname}/node_modules/.bin/electron`),
+//     ignored: /videos|node_modules|[\/\\]\./,
+//     argv: []
+// });
+os.platform() ===
 systemPreferences.askForMediaAccess('camera').then((status)=>{
     console.log('status', status)
     const permission = systemPreferences.getMediaAccessStatus("screen");
