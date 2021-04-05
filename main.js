@@ -19,7 +19,6 @@ const path = require('path');
 //     ignored: /videos|node_modules|[\/\\]\./,
 //     argv: []
 // });
-os.platform() ===
 systemPreferences.askForMediaAccess('camera').then((status)=>{
     console.log('status', status)
     const permission = systemPreferences.getMediaAccessStatus("screen");

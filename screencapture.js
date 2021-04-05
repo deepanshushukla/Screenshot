@@ -11,7 +11,10 @@ const mime = require('mime');
 var chunks = [];
 var mediaRecorder;
 var videoStream;
-const TIMESLICE = 30000;
+const TIMESLICE = 60000;
+const CODEC_TYPE = 'video/webm;codecs=H264';
+const GET_VIDEO_URL = "https://screen-recording-test.s3.amazonaws.com/deepanshu0.webm?AWSAccessKeyId=AKIAU7RBOAYDXM3ZCAA6&Expires=1614589151&Signature=2sg0Nt86jYflXp3B6znPxG%2BVQ7I%3D";
+const UPLOAD_VIDEO_URL = "https://screen-recording-test.s3.amazonaws.com/deepanshu1?AWSAccessKeyId=AKIAIUH7MQIDID3JYDDA&Expires=1617009967&Signature=RdJjUDz0la3Y31S%2BqOC%2Fiaeym5g%3D"
 function fileUpload() {
     const fileContent = fs.readFileSync(path.join(__dirname,'videos', 'video_60sec_1613983482359.webm'));
     console.log('file',fileContent);
@@ -25,12 +28,12 @@ function fileUpload() {
         },
     };
 
-    fetch("https://screen-recording-test.s3.amazonaws.com/deepanshu0.webm?AWSAccessKeyId=AKIAU7RBOAYDXM3ZCAA6&Expires=1614589151&Signature=iGgV32ofbhQhUmqJC28i0nK6pTc%3D",
+    fetch(UPLOAD_VIDEO_URL,
         requestOptions)
         .then(result => {
             console.log(result)
 
-        fetch("https://screen-recording-test.s3.amazonaws.com/deepanshu0.webm?AWSAccessKeyId=AKIAU7RBOAYDXM3ZCAA6&Expires=1614589151&Signature=2sg0Nt86jYflXp3B6znPxG%2BVQ7I%3D").
+        fetch(GET_VIDEO_URL).
         then((res)=>{
             res?.arrayBuffer().then((buff)=> {
                 const data = new Uint8Array(buff);
@@ -47,7 +50,7 @@ function fileUpload() {
 }
 function saveAfterTimeSlice () {
         const blob = new Blob(chunks, {
-            type: 'video/webm; codecs=vp9'
+            type: CODEC_TYPE
         });
 
 
@@ -73,7 +76,7 @@ function saveAfterTimeSlice () {
 function saveRecording (e){
     var save =  function () {
         const blob = new Blob(chunks, {
-            type: 'video/webm; codecs=vp9'
+            type: CODEC_TYPE
         });
         blob.arrayBuffer().then((result)=>{
             const buffer = Buffer.from(result);
@@ -158,7 +161,7 @@ function fullScreenScreenshot(callback, imageFormat) {
         }
         // Create hidden video tag
 
-        mediaRecorder = new MediaRecorder(videoStream, {mimeType: 'video/webm; codecs=vp9'});
+        mediaRecorder = new MediaRecorder(videoStream, {mimeType: CODEC_TYPE});
         mediaRecorder.ondataavailable = function(e) {
             chunks.push(e.data);
             saveAfterTimeSlice()
@@ -232,7 +235,6 @@ function fullScreenScreenshot(callback, imageFormat) {
                         }
                     });
                     stream.stop = function () {
-                        console.log('stop called');
                         stream.getAudioTracks().forEach(function (track) {
                             track.stop();
                         });
